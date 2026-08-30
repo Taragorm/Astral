@@ -14,6 +14,7 @@
 //#include <RFM69_ATC.h>     //get it here: https://www.github.com/lowpowerlab/rfm69
 #include <RadioRFM69.h>
 #include <BME280Unit.h>
+#include <psiutil.h>
 
 const SleepStates _sleepStates[] =
 {
@@ -35,7 +36,7 @@ IotStation<
     //NullAnalog<Pins::VBATT, telemetry::TelemIndex::BattVolts>,
     NullAnalog<0,telemetry::TelemIndex::NOTIMPL>,               // No LDR (params are ignored)
     //ControlPin<Pins::LED, true>,                              // LED (pulldown)
-    NullControlPin<true>,
+    NullControlPin<0,true>,
     ControlPin<Pins::POWER_SW, false>,                          // POWER ENABLE
     //PitSleep<WAKE_DELAY>,                                     // Sleep Algo <secs>
     PitSleep<30>,                                               // Sleep Algo <secs>
@@ -53,21 +54,24 @@ static void setLed(bool st)
 //----------------------------------------------------------
 void setup()
 {
+#if SWAP_SPI    
     SPI.swap();
+#endif
+#if SWAP_SERIAL
     Serial.swap();
+#endif
     Serial.begin(115200);
-    delay(10);
-    Serial.write("\fInit\r\n");
-    Serial.printf("Net  =%8s %d\r\n", NETNAME, NETWORKID);
-    Serial.printf("Node =%8s %d\r\n", IDSTR, NODE_IDENT);
+    delay(50);
+    XTRACE("\fInit");
+    //Serial.printf("Net  =%8s %d\r\n", NETNAME, NETWORKID);
+    //Serial.printf("Node =%8s %d\r\n", IDSTR, NODE_IDENT);
 
     // just leave it powered up
     pinMode(Pins::POWER_SW, OUTPUT);
     digitalWriteFast(Pins::POWER_SW, 1);
 
-    ClockControl::enableXtal(true,true);
+    //ClockControl::enableXtal(true,true);
 
-    //Serial.write("Init2\r\n");
     _station.setup();
 
     _station.sleep
@@ -95,14 +99,14 @@ void setup()
 
     wdt_enable(WDT_PERIOD_8KCLK_gc); // 8s - not same codes as basic arduino
 
-    Serial.println("Showtime");
+    XTRACE("Showtime");
     delay(500);
 
 }
 //----------------------------------------------------------
 void loop()
 {
-    //Serial.print('*'); 
+    Serial.print('*'); 
     _station.loop();
    //_station.dumpTelemetry();
 }

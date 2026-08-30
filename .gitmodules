@@ -1,0 +1,18 @@
+[submodule "src/libz/PsiNetCred"]
+	path = src/libz/PsiNetCred
+	url = https://github.com/Taragorm/PsiNetCred.git
+[submodule "src/libz/PsiOutstation"]
+	path = src/libz/PsiOutstation
+	url = https://github.com/Taragorm/PsiOutstation.git
+[submodule "src/libz/PsiHAL"]
+	path = src/libz/PsiHAL
+	url = https://github.com/Taragorm/PsiHAL.git
+[submodule "src/libz/RFM69"]
+	path = src/libz/RFM69
+	url = https://github.com/Taragorm/RFM69.git
+[submodule "src/libz/PsiCore"]
+	path = src/libz/PsiCore
+	url = https://github.com/Taragorm/PsiCore.git
+[submodule "src/libz/PsiIot"]
+	path = src/libz/PsiIot
+	url = https://github.com/Taragorm/PsiIot.git

@@ -12,8 +12,9 @@
 //~~~~~~~~~ UNIT SELECT ~~~~~~~~~~~~~~~~~
 #define UNIT_TEST 0
 #define UNIT_PATIO 1
+#define UNIT_ASTRAL 2
 
-#define UNIT UNIT_PATIO
+#define UNIT UNIT_ASTRAL
 
 #if UNIT==UNIT_TEST
     #include <test-network.h>
@@ -23,6 +24,8 @@
     #define IS_RFM69HW_HCW false
     #define RADIO_TX_POWER 29
     #define USE_POWER_SWITCH 0
+    #define SWAP_SPI 1
+    #define SWAP_SERIAL 1
 #elif UNIT==UNIT_PATIO
     #include <study-network.h>
     #define IDSTR "PAT"
@@ -31,6 +34,16 @@
     #define IS_RFM69HW_HCW false
     #define RADIO_TX_POWER 29
     #define USE_POWER_SWITCH 0
+    #define SWAP_SPI 1
+    #define SWAP_SERIAL 1
+#elif UNIT==UNIT_ASTRAL
+    #include <study-network.h>
+    #define IDSTR "AST"
+    #define NODE_IDENT ASTRAL_NODEID
+    #define RADIO_TX_POWER 29
+    #define USE_POWER_SWITCH 1
+    #define SWAP_SPI 0
+    #define SWAP_SERIAL 0
 #endif
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
