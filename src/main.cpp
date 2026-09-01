@@ -39,7 +39,7 @@ IotStation<
     NullControlPin<0,true>,
     ControlPin<Pins::POWER_SW, false>,                          // POWER ENABLE
     //PitSleep<WAKE_DELAY>,                                     // Sleep Algo <secs>
-    PitSleep<30>,                                               // Sleep Algo <secs>
+    PitSleep<20+UNIT>,                                          // Sleep Algo <secs>
     //DelaySleep<5>,
     //NullOutputFacet
     RadioRfm69<IOT_BUFFSIZE, Pins::RADIO_CS, Pins::RADIO_IRQ, /*ISRFM69HW*/ false>   // output
@@ -80,7 +80,7 @@ void setup()
     _station.battery
                  .setup(3.3/1023, 0.1); // scale, deadband VBATT
 
-    //_station.climate;
+    _station.climate.setTempOffset(TEMP_OFFSET);
 
     //_station.led(true);
 

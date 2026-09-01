@@ -13,8 +13,12 @@
 #define UNIT_TEST 0
 #define UNIT_PATIO 1
 #define UNIT_ASTRAL 2
+#define UNIT_OFFICE 3
+#define UNIT_KITCHEN 4
+#define UNIT_LOUNGE 5
+#define UNIT_BEDROOM 6
 
-#define UNIT UNIT_ASTRAL
+#define UNIT UNIT_OFFICE
 
 #if UNIT==UNIT_TEST
     #include <test-network.h>
@@ -44,6 +48,43 @@
     #define USE_POWER_SWITCH 1
     #define SWAP_SPI 0
     #define SWAP_SERIAL 0
+    #define TEMP_OFFSET 0
+#elif UNIT==UNIT_OFFICE
+    #include <study-network.h>
+    #define IDSTR "OFF"
+    #define NODE_IDENT OFFICE_NODEID
+    #define RADIO_TX_POWER 29
+    #define USE_POWER_SWITCH 1
+    #define SWAP_SPI 0
+    #define SWAP_SERIAL 0
+    #define TEMP_OFFSET -1.7
+#elif UNIT==UNIT_KITCHEN
+    #include <study-network.h>
+    #define IDSTR "KIT"
+    #define NODE_IDENT KITCHEN_NODEID
+    #define RADIO_TX_POWER 29
+    #define USE_POWER_SWITCH 1
+    #define SWAP_SPI 0
+    #define SWAP_SERIAL 0
+    #define TEMP_OFFSET 0
+#elif UNIT==UNIT_LOUNGE
+    #include <study-network.h>
+    #define IDSTR "LNG"
+    #define NODE_IDENT LOUNGE_NODEID
+    #define RADIO_TX_POWER 29
+    #define USE_POWER_SWITCH 1
+    #define SWAP_SPI 0
+    #define SWAP_SERIAL 0
+    #define TEMP_OFFSET 0
+#elif UNIT==UNIT_BEDROOM
+    #include <study-network.h>
+    #define IDSTR "BED"
+    #define NODE_IDENT BEDROOM_NODEID
+    #define RADIO_TX_POWER 29
+    #define USE_POWER_SWITCH 1
+    #define SWAP_SPI 0
+    #define SWAP_SERIAL 0
+    #define TEMP_OFFSET 0
 #endif
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
