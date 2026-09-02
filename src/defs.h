@@ -18,7 +18,7 @@
 #define UNIT_LOUNGE 5
 #define UNIT_BEDROOM 6
 
-#define UNIT UNIT_OFFICE
+#define UNIT UNIT_LOUNGE
 
 #if UNIT==UNIT_TEST
     #include <test-network.h>
