@@ -47,12 +47,7 @@ IotStation<
 _station;
 
 //----------------------------------------------------------
-static void setLed(bool st)
-{
-    _station.led(st);
-}
-//----------------------------------------------------------
-void setup()
+static void commonSetup()
 {
 #if SWAP_SPI    
     SPI.swap();
@@ -60,17 +55,49 @@ void setup()
 #if SWAP_SERIAL
     Serial.swap();
 #endif
+    delay(500);
     Serial.begin(115200);
-    delay(50);
-    XTRACE("\fInit");
+    //XTRACEF("RST=%02x\r\n", RSTCTRL.RSTFR);
+    delay(1000);
+    //XTRACE("\fInit");
+    XTRACE("\f");
+}
+//----------------------------------------------------------
+
+#if 0
+// TEST SHITE
+void setup()
+{
+    commonSetup();
+    //_station.powerpin.setup();
+    pinModeFast(Pins::POWER_SW, OUTPUT);
+}
+//----------------------------------------------------------
+void loop()
+{
+    Serial.print('*');
+    delay(500);
+    //_station.powerpin.setLogical(true);
+    digitalWriteFast(Pins::POWER_SW, true);
+    Serial.print('1');
+    delay(500);
+    //_station.powerpin.setLogical(false);
+    digitalWriteFast(Pins::POWER_SW, false);
+    Serial.print('0');
+    delay(500);
+}
+#else
+//----------------------------------------------------------
+static void setLed(bool st)
+{
+    _station.led(st);
+}
+//----------------------------------------------------------
+void setup()
+{
+    commonSetup();
     //Serial.printf("Net  =%8s %d\r\n", NETNAME, NETWORKID);
     //Serial.printf("Node =%8s %d\r\n", IDSTR, NODE_IDENT);
-
-    // just leave it powered up
-    pinMode(Pins::POWER_SW, OUTPUT);
-    digitalWriteFast(Pins::POWER_SW, 1);
-
-    //ClockControl::enableXtal(true,true);
 
     _station.setup();
 
@@ -93,21 +120,19 @@ void setup()
                         setLed          // fp to change led state
                         );
 
-    //_station.powerSwitch(true);
-    //digitalWriteFast(Pins::POWER_SWITCH, 1);
-    //_station.powerControl();
-
     wdt_enable(WDT_PERIOD_8KCLK_gc); // 8s - not same codes as basic arduino
 
-    XTRACE("Showtime");
+    //XTRACE("Showtime");
     delay(500);
 
 }
 //----------------------------------------------------------
 void loop()
 {
-    Serial.print('*'); 
+    //Serial.print('*'); 
     _station.loop();
+    //delay(1000);
    //_station.dumpTelemetry();
 }
 //----------------------------------------------------------
+#endif
