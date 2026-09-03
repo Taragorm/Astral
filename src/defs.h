@@ -75,7 +75,7 @@
     #define USE_POWER_SWITCH 1
     #define SWAP_SPI 0
     #define SWAP_SERIAL 0
-    #define TEMP_OFFSET 0
+    #define TEMP_OFFSET -2.2
 #elif UNIT==UNIT_BEDROOM
     #include <study-network.h>
     #define IDSTR "BED"
