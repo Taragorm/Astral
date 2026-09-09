@@ -122,17 +122,18 @@ void setup()
 
     wdt_enable(WDT_PERIOD_8KCLK_gc); // 8s - not same codes as basic arduino
 
-    //XTRACE("Showtime");
+    XTRACE("!>");
     delay(500);
 
 }
 //----------------------------------------------------------
 void loop()
 {
-    //Serial.print('*'); 
+    XTRACE('[');
     _station.loop();
     //delay(1000);
    //_station.dumpTelemetry();
+    XTRACE(']');
 }
 //----------------------------------------------------------
 #endif
