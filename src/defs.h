@@ -57,7 +57,7 @@
     #define USE_POWER_SWITCH 1
     #define SWAP_SPI 0
     #define SWAP_SERIAL 0
-    #define TEMP_OFFSET -1.7
+    #define TEMP_OFFSET -4.0
 #elif UNIT==UNIT_KITCHEN
     #include <study-network.h>
     #define IDSTR "KIT"
