@@ -18,7 +18,7 @@
 #define UNIT_LOUNGE 5
 #define UNIT_BEDROOM 6
 
-#define UNIT UNIT_KITCHEN
+#define UNIT UNIT_BEDROOM
 
 #if UNIT==UNIT_TEST
     #include <test-network.h>
@@ -84,7 +84,7 @@
     #define USE_POWER_SWITCH 1
     #define SWAP_SPI 0
     #define SWAP_SERIAL 0
-    #define TEMP_OFFSET 0
+    #define TEMP_OFFSET -3.0
 #endif
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
