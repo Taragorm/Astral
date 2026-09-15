@@ -109,8 +109,6 @@ void setup()
 
     _station.climate.setTempOffset(TEMP_OFFSET);
 
-    //_station.led(true);
-
     _station.output
                 .setup(
                         IOT_ID_FROM_STR(IDSTR),

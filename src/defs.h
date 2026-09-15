@@ -18,9 +18,11 @@
 #define UNIT_LOUNGE 5
 #define UNIT_BEDROOM 6
 
-#define UNIT UNIT_BEDROOM
+//#define UNIT UNIT_BEDROOM
 
-#if UNIT==UNIT_TEST
+#ifndef UNIT
+    #pragma error Must define UNIT as UNIT_TEST, UNIT_PATIO, UNIT_ASTRAL, UNIT_OFFICE, UNIT_KITCHEN, UNIT_LOUNGE or UNIT_BEDROOM
+#elif UNIT==UNIT_TEST
     #include <test-network.h>
     #define IDSTR "PAT"
     #define NODE_IDENT PATIO_NODEID
@@ -57,7 +59,7 @@
     #define USE_POWER_SWITCH 1
     #define SWAP_SPI 0
     #define SWAP_SERIAL 0
-    #define TEMP_OFFSET -4.0
+    #define TEMP_OFFSET +0.6
 #elif UNIT==UNIT_KITCHEN
     #include <study-network.h>
     #define IDSTR "KIT"
@@ -85,6 +87,8 @@
     #define SWAP_SPI 0
     #define SWAP_SERIAL 0
     #define TEMP_OFFSET -3.0
+#else
+    #pragma error Must define UNIT as UNIT_TEST, UNIT_PATIO, UNIT_ASTRAL, UNIT_OFFICE, UNIT_KITCHEN, UNIT_LOUNGE or UNIT_BEDROOM
 #endif
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
