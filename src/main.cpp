@@ -39,13 +39,54 @@ IotStation<
     NullControlPin<0,true>,
     ControlPin<Pins::POWER_SW, false>,                          // POWER ENABLE
     //PitSleep<WAKE_DELAY>,                                     // Sleep Algo <secs>
-    PitSleep<30>,                                               // Sleep Algo <secs>
+    PitSleep<20+UNIT>,                                          // Sleep Algo <secs>
     //DelaySleep<5>,
     //NullOutputFacet
     RadioRfm69<IOT_BUFFSIZE, Pins::RADIO_CS, Pins::RADIO_IRQ, /*ISRFM69HW*/ false>   // output
 >
 _station;
 
+//----------------------------------------------------------
+static void commonSetup()
+{
+#if SWAP_SPI    
+    SPI.swap();
+#endif
+#if SWAP_SERIAL
+    Serial.swap();
+#endif
+    delay(500);
+    Serial.begin(115200);
+    //XTRACEF("RST=%02x\r\n", RSTCTRL.RSTFR);
+    delay(1000);
+    //XTRACE("\fInit");
+    XTRACE("\f");
+}
+//----------------------------------------------------------
+
+#if 0
+// TEST SHITE
+void setup()
+{
+    commonSetup();
+    //_station.powerpin.setup();
+    pinModeFast(Pins::POWER_SW, OUTPUT);
+}
+//----------------------------------------------------------
+void loop()
+{
+    Serial.print('*');
+    delay(500);
+    //_station.powerpin.setLogical(true);
+    digitalWriteFast(Pins::POWER_SW, true);
+    Serial.print('1');
+    delay(500);
+    //_station.powerpin.setLogical(false);
+    digitalWriteFast(Pins::POWER_SW, false);
+    Serial.print('0');
+    delay(500);
+}
+#else
 //----------------------------------------------------------
 static void setLed(bool st)
 {
@@ -54,23 +95,9 @@ static void setLed(bool st)
 //----------------------------------------------------------
 void setup()
 {
-#if SWAP_SPI    
-    SPI.swap();
-#endif
-#if SWAP_SERIAL
-    Serial.swap();
-#endif
-    Serial.begin(115200);
-    delay(50);
-    XTRACE("\fInit");
+    commonSetup();
     //Serial.printf("Net  =%8s %d\r\n", NETNAME, NETWORKID);
     //Serial.printf("Node =%8s %d\r\n", IDSTR, NODE_IDENT);
-
-    // just leave it powered up
-    pinMode(Pins::POWER_SW, OUTPUT);
-    digitalWriteFast(Pins::POWER_SW, 1);
-
-    //ClockControl::enableXtal(true,true);
 
     _station.setup();
 
@@ -80,7 +107,7 @@ void setup()
     _station.battery
                  .setup(3.3/1023, 0.1); // scale, deadband VBATT
 
-    //_station.climate;
+    _station.climate.setTempOffset(TEMP_OFFSET);
 
     //_station.led(true);
 
@@ -93,21 +120,20 @@ void setup()
                         setLed          // fp to change led state
                         );
 
-    //_station.powerSwitch(true);
-    //digitalWriteFast(Pins::POWER_SWITCH, 1);
-    //_station.powerControl();
-
     wdt_enable(WDT_PERIOD_8KCLK_gc); // 8s - not same codes as basic arduino
 
-    XTRACE("Showtime");
+    XTRACE("!>");
     delay(500);
 
 }
 //----------------------------------------------------------
 void loop()
 {
-    Serial.print('*'); 
+    XTRACE('[');
     _station.loop();
+    //delay(1000);
    //_station.dumpTelemetry();
+    XTRACE(']');
 }
 //----------------------------------------------------------
+#endif
