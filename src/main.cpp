@@ -31,7 +31,7 @@ const SleepStates _sleepStates[] =
  */
 IotStation<
     //NullSensorFacet,
-    BME280Unit<Pins::BME280_CS>,
+    BME280Unit<Pins::BME280_CS, (uint8_t) BME_SPI_MODE>,
     AnalogPin<Pins::VBATT, telemetry::TelemIndex::BattVolts>,
     //NullAnalog<Pins::VBATT, telemetry::TelemIndex::BattVolts>,
     NullAnalog<0,telemetry::TelemIndex::NOTIMPL>,               // No LDR (params are ignored)

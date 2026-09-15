@@ -50,7 +50,8 @@
     #define USE_POWER_SWITCH 1
     #define SWAP_SPI 0
     #define SWAP_SERIAL 0
-    #define TEMP_OFFSET 0
+    #define TEMP_OFFSET -0.3
+    //#define BME_SPI_MODE SPI_MODE0
 #elif UNIT==UNIT_OFFICE
     #include <study-network.h>
     #define IDSTR "OFF"
@@ -94,7 +95,9 @@
 
 #define WAKE_DELAY (121+3*NODE_IDENT)
 
-
+#ifndef BME_SPI_MODE
+    #define BME_SPI_MODE SPI_MODE3
+#endif
 
 
 #if 1
