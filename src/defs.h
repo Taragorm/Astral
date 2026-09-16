@@ -50,7 +50,7 @@
     #define USE_POWER_SWITCH 1
     #define SWAP_SPI 0
     #define SWAP_SERIAL 0
-    #define TEMP_OFFSET -0.3
+    #define TEMP_OFFSET +0.4
     //#define BME_SPI_MODE SPI_MODE0
 #elif UNIT==UNIT_OFFICE
     #include <study-network.h>
@@ -60,7 +60,7 @@
     #define USE_POWER_SWITCH 1
     #define SWAP_SPI 0
     #define SWAP_SERIAL 0
-    #define TEMP_OFFSET +0.6
+    #define TEMP_OFFSET -0.84
 #elif UNIT==UNIT_KITCHEN
     #include <study-network.h>
     #define IDSTR "KIT"
@@ -69,7 +69,7 @@
     #define USE_POWER_SWITCH 1
     #define SWAP_SPI 0
     #define SWAP_SERIAL 0
-    #define TEMP_OFFSET +0.7
+    #define TEMP_OFFSET +0.1
 #elif UNIT==UNIT_LOUNGE
     #include <study-network.h>
     #define IDSTR "LNG"
@@ -78,7 +78,7 @@
     #define USE_POWER_SWITCH 1
     #define SWAP_SPI 0
     #define SWAP_SERIAL 0
-    #define TEMP_OFFSET +1.9
+    #define TEMP_OFFSET -0.5
 #elif UNIT==UNIT_BEDROOM
     #include <study-network.h>
     #define IDSTR "BED"
@@ -87,7 +87,7 @@
     #define USE_POWER_SWITCH 1
     #define SWAP_SPI 0
     #define SWAP_SERIAL 0
-    #define TEMP_OFFSET +1.2
+    #define TEMP_OFFSET -0.5
 #else
     #pragma error Must define UNIT as UNIT_TEST, UNIT_PATIO, UNIT_ASTRAL, UNIT_OFFICE, UNIT_KITCHEN, UNIT_LOUNGE or UNIT_BEDROOM
 #endif

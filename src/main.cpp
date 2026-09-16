@@ -61,6 +61,8 @@ static void commonSetup()
     delay(1000);
     //XTRACE("\fInit");
     XTRACE("\f");
+    XTRACEC(IDSTR);
+
 }
 //----------------------------------------------------------
 
